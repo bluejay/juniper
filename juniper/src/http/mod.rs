@@ -188,6 +188,15 @@ where
     pub fn is_ok(&self) -> bool {
         self.0.is_ok()
     }
+
+    /// Check if there were any field execution errors
+    pub fn has_execution_errors(&self) -> bool {
+        match &self.0 {
+            Ok((_, errs)) => errs.len() != 0,
+            Err(_) => true
+        }
+    }
+
 }
 
 impl<T> Serialize for GraphQLResponse<T>
